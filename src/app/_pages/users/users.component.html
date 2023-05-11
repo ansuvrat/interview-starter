@@ -1,0 +1,54 @@
+<div class="container">
+    
+    <table class="table">
+        
+        <thead>
+            <tr>
+                <td colspan="4" align="center" class="userheading">User Management</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let row of userDataArr">
+                <tr>
+                    <td>
+                        <span  [ngClass]="row.id === setEditUserId ? selectedupdownbuttonclass : updownbuttonclass"
+                            (click)="showHdideEdit(row.id,typeId)"></span> 
+                        {{row.name}}
+                    </td>
+                    <td>{{row.email}}</td>
+                    <td>{{row.age}}</td>
+                    <td>{{row.salary}}</td>
+                </tr>
+                <tr >
+                    <td colspan="4" *ngIf="row.id == setEditUserId">
+                        <table class="edittablecss" >
+                            <tr>
+                                <td class="tablecell">Name : <input #nameID type="text" value="{{row.name}}"></td>
+                                <td class="tablecell">Email : <input #emailID type="text" value="{{row.email}}"></td>
+                            </tr>
+                            <tr>
+                                <td class="tablecell">Age : <input #ageId (keypress)="numericOnly($event)" type="text" value="{{row.age}}"></td>
+                                <td class="tablecell">Salary : <input (keypress)="numericOnly($event)" #salaryId type="text" value="{{row.salary}}"></td>
+                            </tr>
+                            <tr>
+                                <td >
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" 
+                                        (click)="editUserData(nameID.value,emailID.value,ageId.value,salaryId.value)">{{saveButton}}</button>
+                                    <button style="margin-left: 10px;" class="btn btn-secondary" (click)="clearEditData()">Clear
+                                    </button></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
